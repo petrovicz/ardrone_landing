@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+
+<launch>
+        <!-- ardrone_autonomy related settings -->
+        <node name="ardrone_driver" pkg="ardrone_autonomy" type="ardrone_driver" output="screen" clear_params="true">
+                <param name="outdoor" value="0" />
+                <param name="flight_without_shell" value="0" />
+                <param name="altitude_max" value="2000" />
+                <param name="altitude_min" value="50" />
+                <param name="euler_angle_max" value="0.1" />
+                <param name="control_vz_max" value="200" />
+                <param name="control_yaw" value="0.7" />
+                <param name="video_channel" value="1" />
+        </node>
+
+        <!-- ar_track_alvar related settings -->
+        <arg name="marker_size" default="4.4" />
+        <arg name="max_new_marker_error" default="0.08" />
+        <arg name="max_track_error" default="0.2" />
+        <arg name="cam_image_topic" default="/ardrone/bottom/image_raw" />
+        <arg name="cam_info_topic" default="/ardrone/bottom/camera_info" />
+        <arg name="output_frame" default="/ardrone_base_bottomcam" />
+
+        <node name="ar_track_alvar" pkg="ar_track_alvar" type="individualMarkersNoKinect" respawn="false" output="screen">
+                <param name="marker_size"           type="double" value="$(arg marker_size)" />
+                <param name="max_new_marker_error"  type="double" value="$(arg max_new_marker_error)" />
+                <param name="max_track_error"       type="double" value="$(arg max_track_error)" />
+                <param name="output_frame"          type="string" value="$(arg output_frame)" />
+
+                <remap from="camera_image"  to="$(arg cam_image_topic)" />
+                <remap from="camera_info"   to="$(arg cam_info_topic)" />
+        </node>
+
+        <!-- image_view for monitoring the field of view of the drone -->
+        <node name="image_view" pkg="image_view" type="image_view">
+                <remap from="image"  to="/ardrone/image_raw" />
+        </node>
+</launch>
