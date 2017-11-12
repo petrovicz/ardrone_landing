@@ -1,5 +1,5 @@
 # ardrone_landing
-Performs an autonomus landing of an AR Drone 2.0 with the help of marker detection and OptiTrack positioning
+Performs autonomus landing of an AR Drone 2.0 with the help of marker detection and OptiTrack positioning
 
 Prerequisites:
 1. AR Drone 2.0
