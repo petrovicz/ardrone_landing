@@ -10,7 +10,6 @@
                 <param name="euler_angle_max" value="0.1" />
                 <param name="control_vz_max" value="200" />
                 <param name="control_yaw" value="0.7" />
-                <param name="video_channel" value="1" />
         </node>
 
         <!-- ar_track_alvar related settings -->
