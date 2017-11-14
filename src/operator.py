@@ -40,11 +40,12 @@ if __name__ == '__main__':
         time.sleep(1)
 
         rospy.loginfo("Starting OptiTrackController")
-        OptiTrackController = optitrack.OptiTrackController()
+        OptiTrackController = optitrack.OptiTrackController(controller)
         rospy.loginfo("Starting LandingController")
-        landingController = landing.LandingController()
+        landingController = landing.LandingController(controller)
 
         while not rospy.is_shutdown():
+            # controller.sendCommand()
             time.sleep(1)
 
     except rospy.ROSInterruptException:

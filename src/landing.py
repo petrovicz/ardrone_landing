@@ -12,15 +12,17 @@ from visualization_msgs.msg import Marker 	# for receiving marker detection
 
 
 class LandingController():
-    def __init__(self):
-        self.status = -1
-        rospy.loginfo("Initiating LandingController")
+    def __init__(self, controller):
 
-        # If marker is detected it calls the detected(data) function
-        rospy.Subscriber("/visualization_marker", Marker, self.detected)
+        self.controller = controller
 
-    def land():
-        rospy.loginfo("Landing")
+        # If marker is detected it calls the performLanding(data) function
+        rospy.Subscriber("/visualization_marker", Marker, self.perfromLanding)
 
-    def detected(self, data):
-        rospy.loginfo("Detected")
+    def perfromLanding(self, data):
+        rospy.loginfo("x:" + str(data.pose.position.x))
+        rospy.loginfo("y:" + str(data.pose.position.y))
+        rospy.loginfo("z:" + str(data.pose.position.z))
+
+        # Here comes the positioning
+        self.controller.SetCommand(0, 0, 0, 0)
