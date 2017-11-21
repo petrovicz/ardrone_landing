@@ -7,8 +7,10 @@
 # Importing libraries
 import rospy
 
-# Importing messages
-from visualization_msgs.msg import Marker 	# for receiving marker detection
+# Importing messages and services
+from visualization_msgs.msg import Marker
+from sensor_msgs.msg import CameraInfo
+from std_srvs.srv import Empty
 
 
 class LandingController():
@@ -19,6 +21,9 @@ class LandingController():
         # If marker is detected it calls the performLanding(data) function
         rospy.Subscriber("/visualization_marker", Marker, self.perfromLanding)
 
+        self.camera = rospy.Subscriber("/ardrone/camera_info",
+                                       CameraInfo, self.toggleCam)
+
     def perfromLanding(self, data):
         rospy.loginfo("x:" + str(data.pose.position.x))
         rospy.loginfo("y:" + str(data.pose.position.y))
@@ -26,3 +31,16 @@ class LandingController():
 
         # Here comes the positioning
         self.controller.SetCommand(0, 0, 0, 0)
+
+    def toggleCam(self, data):
+        # Toggle to bottomcam if not in use
+        if data.header.frame_id == "ardrone_base_bottomcam":
+            self.camera.unregister()
+        else:
+            rospy.wait_for_service('/ardrone/togglecam')
+            togglecam = rospy.ServiceProxy('/ardrone/togglecam', Empty)
+
+            try:
+                togglecam()
+            except rospy.ServiceException, e:
+                print "Service did not process request: %s" % str(e)
