@@ -1,4 +1,4 @@
-# ardrone_landing ![kinetic](https://img.shields.io/badge/ros-kinetic-blue.svg)
+# ardrone_landing [![kinetic](https://img.shields.io/badge/ros-kinetic-blue.svg)](http://wiki.ros.org/kinetic)
 Performs autonomus landing of an AR Drone 2.0 with the help of marker detection and OptiTrack positioning
 > Note: This package is only the frame of the project yet. Future commits will make it work.
 
@@ -6,8 +6,9 @@ Performs autonomus landing of an AR Drone 2.0 with the help of marker detection 
 1. AR Drone 2.0
 2. OptiTrack camera system
 3. Install ardrone_autonomy
-4. Install ardrone_tutorials
-5. Install ar_track_alvar
+4. Install ros kinetic
+5. Install ardrone_tutorials
+6. Install ar_track_alvar
 
 ## How to use
 1. Launch **autonomus_landing** for starting the **ardrone_driver** and **ar_track_alvar**  
