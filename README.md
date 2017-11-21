@@ -1,4 +1,4 @@
-# ardrone_landing
+# ardrone_landing ![kinetic](https://img.shields.io/badge/ros-kinetic-blue.svg)
 Performs autonomus landing of an AR Drone 2.0 with the help of marker detection and OptiTrack positioning
 > Note: This package is only the frame of the project yet. Future commits will make it work.
 
