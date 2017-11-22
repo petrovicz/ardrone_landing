@@ -12,8 +12,14 @@ Performs autonomus landing of an AR Drone 2.0 with the help of marker detection 
 
 ## How to use
 1. Launch **autonomus_landing** for starting the **ardrone_driver** and **ar_track_alvar**  
-`roslaunch ardrone_landing autonomus_landing.launch`
+```bash
+roslaunch ardrone_landing autonomus_landing.launch
+```
 2. Ensure that the status of the drone is **not** set to **Emergency**. You can toggle it with the following command  
-`rostopic pub /ardrone/reset std_msgs/Empty -1`
+```bash
+rostopic pub /ardrone/reset std_msgs/Empty -1
+```
 3. Run the **operator**  
-`rosrun ardrone_landing operator.py`
+```bash
+rosrun ardrone_landing operator.py
+```
