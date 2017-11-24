@@ -9,6 +9,7 @@ Performs autonomus landing of an AR Drone 2.0 with the help of marker detection 
 4. Install ros kinetic
 5. Install ardrone_tutorials
 6. Install ar_track_alvar
+7. Install vrpn_client_ros
 
 ## How to use
 1. Launch **autonomus_landing** for starting the **ardrone_driver** and **ar_track_alvar**  
