@@ -12,7 +12,8 @@ Performs autonomus landing of an AR Drone 2.0 with the help of marker detection 
 7. Install vrpn_client_ros
 
 ## How to use
-1. Launch **autonomus_landing** for starting the **ardrone_driver** and **ar_track_alvar**  
+> Note: Before launching, please update all of the IP addresses according to your environment!
+1. Launch **autonomus_landing** for starting every necessary node
 ```bash
 roslaunch ardrone_landing autonomus_landing.launch
 ```
