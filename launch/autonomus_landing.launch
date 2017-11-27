@@ -1,37 +1,55 @@
 <?xml version="1.0"?>
 
 <launch>
-        <!-- ardrone_autonomy related settings -->
+        <!-- ardrone_autonomy -->
         <node name="ardrone_driver" pkg="ardrone_autonomy" type="ardrone_driver" output="screen" clear_params="true">
-                <param name="outdoor" value="0" />
-                <param name="flight_without_shell" value="0" />
-                <param name="altitude_max" value="2000" />
-                <param name="altitude_min" value="50" />
-                <param name="euler_angle_max" value="0.1" />
-                <param name="control_vz_max" value="200" />
-                <param name="control_yaw" value="0.7" />
+
+                <param name="ip"                        value="192.168.1.1" />
+
+                <param name="outdoor"                   value="0" />
+                <param name="flight_without_shell"      value="0" />
+                <param name="altitude_max"              value="500" />
+                <param name="altitude_min"              value="50" />
+                <param name="euler_angle_max"           value="0.1" />
+                <param name="control_vz_max"            value="200" />
+                <param name="control_yaw"               value="0.7" />
+
         </node>
 
-        <!-- ar_track_alvar related settings -->
-        <arg name="marker_size" default="4.4" />
-        <arg name="max_new_marker_error" default="0.08" />
-        <arg name="max_track_error" default="0.2" />
-        <arg name="cam_image_topic" default="/ardrone/bottom/image_raw" />
-        <arg name="cam_info_topic" default="/ardrone/bottom/camera_info" />
-        <arg name="output_frame" default="/ardrone_base_bottomcam" />
-
+        <!-- ar_track_alvar -->
         <node name="ar_track_alvar" pkg="ar_track_alvar" type="individualMarkersNoKinect" respawn="false" output="screen">
-                <param name="marker_size"           type="double" value="$(arg marker_size)" />
-                <param name="max_new_marker_error"  type="double" value="$(arg max_new_marker_error)" />
-                <param name="max_track_error"       type="double" value="$(arg max_track_error)" />
-                <param name="output_frame"          type="string" value="$(arg output_frame)" />
 
-                <remap from="camera_image"  to="$(arg cam_image_topic)" />
-                <remap from="camera_info"   to="$(arg cam_info_topic)" />
+                <param name="marker_size"               value="4.4" />
+                <param name="max_new_marker_error"      value="0.08" />
+                <param name="max_track_error"           value="0.2" />
+
+                <param name="output_frame"              value="/ardrone_base_bottomcam" />
+
+                <remap from="camera_image"              to="/ardrone/bottom/image_raw" />
+                <remap from="camera_info"               to="/ardrone/bottom/camera_info" />
+
         </node>
 
         <!-- image_view for monitoring the field of view of the drone -->
         <node name="image_view" pkg="image_view" type="image_view">
-                <remap from="image"  to="/ardrone/image_raw" />
+
+                <remap from="image"                     to="/ardrone/image_raw" />
+
+        </node>
+
+        <!-- VRPN Client-->
+        <node pkg="vrpn_client_ros" type="vrpn_client_node" name="vrpn_client_node" output="screen">
+
+                <param name="server"                    value="192.168.121.131" />
+                <param name="port"                      value="3883" />
+
+                <param name="update_frequency"          value="100.0" />
+                <param name="frame_id"                  value="world" />
+
+                <param name="use_server_time"           value="false" />
+                <param name="broadcast_tf"              value="true" />
+
+                <param name="refresh_tracker_frequency" value="1.0" />
+
         </node>
 </launch>
