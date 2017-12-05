@@ -26,6 +26,10 @@ if __name__ == '__main__':
         rospy.loginfo("Taking off drone")
         controller.SendTakeoff()
 
+        # Hovering state in ardrone_autonomy is imperfect so wait until
+        # the drone goes idle
+        time.sleep(2)
+
         rospy.loginfo("Starting OptiTrackController")
         OptiTrackController = optitrack.OptiTrackController(controller)
         rospy.loginfo("Starting LandingController")

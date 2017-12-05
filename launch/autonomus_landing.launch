@@ -8,13 +8,16 @@
 
                 <param name="outdoor"                   value="0" />
                 <param name="flight_without_shell"      value="0" />
-                <param name="altitude_max"              value="500" />
-                <param name="altitude_min"              value="50" />
+                <param name="altitude_max"              value="800" />
+                <param name="altitude_min"              value="100" />
                 <param name="euler_angle_max"           value="0.1" />
                 <param name="control_vz_max"            value="200" />
                 <param name="control_yaw"               value="0.7" />
 
         </node>
+
+        <!-- Possible values: bottom | front -->
+        <arg name="camera" value="front" />
 
         <!-- ar_track_alvar -->
         <node name="ar_track_alvar" pkg="ar_track_alvar" type="individualMarkersNoKinect" respawn="false" output="screen">
@@ -23,10 +26,10 @@
                 <param name="max_new_marker_error"      value="0.08" />
                 <param name="max_track_error"           value="0.2" />
 
-                <param name="output_frame"              value="/ardrone_base_bottomcam" />
+                <param name="output_frame"              value="/ardrone_base_$(arg camera)cam" />
 
-                <remap from="camera_image"              to="/ardrone/bottom/image_raw" />
-                <remap from="camera_info"               to="/ardrone/bottom/camera_info" />
+                <remap from="camera_image"              to="/ardrone/$(arg camera)/image_raw" />
+                <remap from="camera_info"               to="/ardrone/$(arg camera)/camera_info" />
 
         </node>
 
